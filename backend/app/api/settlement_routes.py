@@ -1,4 +1,4 @@
-from flask import Blueprint, session, request
+from flask import Blueprint, request
 from ..models import db, Settlement
 from ..forms import SettlementForm
 
@@ -6,13 +6,16 @@ settlement = Blueprint('settlement', __name__)
 
 @settlement.route('', methods=['GET'])
 def get_settlement():
-    settlement = Settlement.query.all()[0]
-    return { settlement.to_dict() }
+    settlements = Settlement.query.all()
+    if len(settlements):
+        settlement = settlements[0]
+        return settlement.to_dict()
+    return { 'error': 'Settlement does not exist' }, 404
 
 @settlement.route('', methods=['POST'])
 def create_settlement():
-    settlement = Settlement.query.all()[0]
-    if settlement:
+    settlements = Settlement.query.all()
+    if len(settlements):
         return {'errors': 'Settlement already exists'}, 401
     form = SettlementForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -42,10 +45,10 @@ def edit_settlement():
 
 @settlement.route('', methods=['DELETE'])
 def delete_server():
-    settlement = Settlement.query.all()[0]
-    if settlement:
-        db.session.delete(settlement)
+    settlements = Settlement.query.all()
+    if len(settlements):
+        db.session.delete(settlements[0])
         db.session.commit()
         return {'message': 'Successfully deleted'}
-    return {'errors': {'message': 'Unauthorized'}}, 403
+    return {'error': 'Settlement does not exist'}, 404
 
