@@ -1,0 +1,122 @@
+.main_content_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.main_content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.main_content_tile {
+    min-width: 500px;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--orange-dark);
+    gap: 5px;
+}
+
+.not_RFQ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    color: rgb(250, 27, 27);
+    gap: 5px;
+}
+
+.is_RFQ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    color: rgb(10, 169, 10);
+    gap: 5px;
+}
+
+.table_wrapper {
+    min-width: 500px;
+    max-width: 500px;
+    border-radius: 3px;
+}
+
+.messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    gap: 5px;
+    width: 100%;
+}
+
+.response {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    max-width: 300px;
+    border: 1px solid var(--gray-med);
+    transition: all 0.5s;
+    padding: 15px;
+    font-size: 14px;
+    height: 300px
+}
+
+.email_form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 300px;
+    width: fit-content;
+}
+
+.navigate_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    max-width: 40px;
+    box-sizing: border-box;
+}
+
+.navigate_button {
+    height: 40px;
+    width: 40px;
+    background-color: var(--gray-med);
+    opacity: 40%;
+    color: var(--gray-dark);
+    cursor: pointer;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.navigate_button:hover {
+    opacity: 70%;
+}
+
+.navigate_button:active {
+    opacity: 90%;
+}
