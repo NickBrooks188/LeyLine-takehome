@@ -1,10 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { persistReducer } from "redux-persist";
-import { sessionReducer } from "@/app/redux/session";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import { inventoryReducer } from "./inventory";
-import { quoteReducer } from "./quotes";
+import { settlementReducer } from "./settlement";
+import { sessionReducer } from "./session";
 
 const createNoopStorage = () => {
     return {
@@ -35,8 +34,7 @@ const persistedReducer = persistReducer(authPersistConfig, sessionReducer);
 
 const rootReducer = combineReducers({
     session: persistedReducer,
-    inventory: inventoryReducer,
-    quotes: quoteReducer
+    settlement: settlementReducer
 });
 
 export const store = configureStore({

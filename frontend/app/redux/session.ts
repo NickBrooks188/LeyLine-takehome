@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+interface Credentials { [key: string]: string; }
+
+// TODO: replace any
 const initialState: any = {};
 
 export const thunkAuthenticate = (token: string) => async (dispatch: any) => {

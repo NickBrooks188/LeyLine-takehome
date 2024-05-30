@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css"
 import Link from "next/link";
 import Image from 'next/image'
-import { thunkGetAllInventory, thunkAddInventory, thunkUpdateInventory } from "../redux/inventory";
+import { thunkGetAllInventory, thunkAddInventory, thunkUpdateInventory } from "../redux/settlement";
 import { thunkGetAllQuotes } from "../redux/quotes";
 import DataTable from "react-data-table-component";
 

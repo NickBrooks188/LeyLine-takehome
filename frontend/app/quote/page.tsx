@@ -9,7 +9,7 @@ import { faCircleXmark, faCircleCheck } from "@fortawesome/free-regular-svg-icon
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import DataTable from "react-data-table-component";
 import OpenAI from "openai";
-import { thunkGetAllInventory } from "../redux/inventory";
+import { thunkGetAllInventory } from "../redux/settlement";
 import { thunkCreateQuote } from "../redux/quotes";
 
 const columns = [
