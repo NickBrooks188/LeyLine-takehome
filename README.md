@@ -33,4 +33,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to use the
 
 ## 🎥 Video Walkthrough
 
-[Walkthrough link](http://localhost:3000)
+[Walkthrough link](https://drive.google.com/file/d/15Ysvk_-oAmxOhJvRbR7NOwhhpNvsQ5yW/view?usp=sharing)
