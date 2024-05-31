@@ -119,7 +119,7 @@ export default function Page() {
                     {(status === "Accepted") && <span className={styles.accepted}>{status}</span>}
                 </div>
                 <div className={styles.submit_wrapper}>
-                    <div className="currency">$</div><input type="number" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))} />
+                    <div className="currency">$</div><input type="number" min='0' value={amount} onChange={(e) => setAmount(parseInt(e.target.value))} />
                     <button onClick={handleSubmit} disabled={(status === "Accepted") || (amount < 1)} className="button-dark">Submit</button>
                 </div>
             </main>
