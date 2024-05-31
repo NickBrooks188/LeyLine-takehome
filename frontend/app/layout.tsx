@@ -8,8 +8,8 @@ const ReduxProvider = dynamic(() => import("@/app/redux/StoreProvider"), {
 }); const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Cloudforge",
-  description: "Quote processor",
+  title: "Settlement",
+  description: "Settlement",
 };
 
 export default function RootLayout({

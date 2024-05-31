@@ -90,8 +90,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-image: linear-gradient(258.27deg, rgba(31, 31, 32, .4) 25.64%, rgba(98, 98, 97, .4)),
-    linear-gradient(153.23deg, #1a1a1a 13.27%, #171717 79.22%);
+  /* background-image: linear-gradient(258.27deg, rgba(31, 31, 32, .4) 25.64%, rgba(98, 98, 97, .4)), */
+  /* linear-gradient(153.23deg, #1a1a1a 13.27%, #171717 79.22%); */
 }
 
 /* body {
@@ -126,8 +126,8 @@ a {
 
 .button-dark {
   background-color: transparent;
-  border-radius: 80px;
-  padding: 20px;
+  border-radius: 8px;
+  padding: 14px;
   color: white;
   font-size: 14px;
   display: flex;
@@ -156,8 +156,8 @@ a {
 
 .button-light {
   background-color: var(--orange-light);
-  border-radius: 80px;
-  padding: 20px;
+  border-radius: 8px;
+  padding: 14px;
   color: black;
   font-size: 14px;
   display: flex;
@@ -235,4 +235,15 @@ button:disabled:hover {
   background-color: #aaa;
   color: #666;
   cursor: not-allowed;
+}
+
+.back {
+  position: absolute;
+  padding: 10px;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.back:hover {
+  text-decoration: underline;
 }

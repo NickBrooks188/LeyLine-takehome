@@ -67,7 +67,7 @@ export const settlementSlice = createSlice({
     initialState,
     reducers: {
         setSettlement: (state, action: PayloadAction) => {
-            state.items = action.payload
+            state = action.payload
         }
     }
 });
