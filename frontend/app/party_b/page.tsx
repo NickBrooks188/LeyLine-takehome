@@ -3,10 +3,10 @@ import { useAppSelector, useAppDispatch } from "../redux/store"
 import { useEffect, useState } from "react";
 import styles from "./partyb.module.css"
 import Link from "next/link";
-import Image from 'next/image'
 import { thunkGetSettlement, thunkUpdateSettlement } from "../redux/settlement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { io } from 'socket.io-client';
 
 
@@ -122,8 +122,8 @@ export default function Page() {
                     <div className={`${styles.offer} ${highlight ? styles.highlight : ''}`}>{`${(amount === "N/A") ? "" : "$"}${amount}`}</div>
                 </div>
                 <div className={styles.response_wrapper}>
-                    <button onClick={rejectSettlement} disabled={(status !== "Offered")} className="button-dark">Reject</button>
-                    <button onClick={acceptSettlement} disabled={(status !== "Offered")} className="button-light">Accept</button>
+                    <button onClick={rejectSettlement} disabled={(status !== "Offered")} className="button-dark"><FontAwesomeIcon icon={faCircleXmark} />Dispute</button>
+                    <button onClick={acceptSettlement} disabled={(status !== "Offered")} className="button-light"><FontAwesomeIcon icon={faCircleCheck} />Agree</button>
                 </div>
             </main>
         </>

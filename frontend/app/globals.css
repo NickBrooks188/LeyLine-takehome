@@ -135,7 +135,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   transition: all 0.2s;
   box-sizing: border-box;
   margin: 10px 0 10px 0;
@@ -165,7 +165,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   transition: all 0.2s;
   box-sizing: border-box;
   margin: 10px 0 10px 0;

@@ -21,10 +21,10 @@ export default function Page() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const getInventory = async () => {
+        const getSettlement = async () => {
             const serverData = await dispatch(thunkGetSettlement())
         }
-        getInventory()
+        getSettlement()
     }, [])
 
 

@@ -1,14 +1,21 @@
 'use client'
-import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsSpin } from "@fortawesome/free-solid-svg-icons";
-import { thunkDeleteSettlement } from "./redux/settlement";
+import { thunkDeleteSettlement, thunkGetSettlement } from "./redux/settlement";
 import { useAppDispatch } from "./redux/store";
+import { useEffect } from "react";
 
 export default function Home() {
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getSettlement = async () => {
+      const serverData = await dispatch(thunkGetSettlement())
+    }
+    getSettlement()
+  }, [])
 
   const deleteSettlement = async () => {
     const serverData = await dispatch(thunkDeleteSettlement());
