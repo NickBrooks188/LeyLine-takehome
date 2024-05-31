@@ -20,13 +20,38 @@ export default function Page() {
         const fetchAsync = async () => {
             const serverData: any = await dispatch(thunkGetSettlement())
         }
-
         fetchAsync()
     }, [])
 
     useEffect(() => {
+        if (settlement) {
+            setStatus(settlement.status)
+            setAmount(settlement.amount)
+        }
+        console.log(settlement)
+    }, [settlement])
+
+    useEffect(() => {
         document.title = 'Party B'
     }, [])
+
+    const rejectSettlement = async () => {
+        const serverData: any = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Rejected' }))
+        if (serverData.errors) {
+            console.error(serverData.errors)
+        } else {
+            setStatus('Rejected')
+        }
+    }
+
+    const acceptSettlement = async () => {
+        const serverData: any = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Accepted' }))
+        if (serverData.errors) {
+            console.error(serverData.errors)
+        } else {
+            setStatus('Accepted')
+        }
+    }
 
     return (
         <>
@@ -40,10 +65,14 @@ export default function Page() {
                     {(status === "Rejected") && <span className={styles.rejected}>{status}</span>}
                     {(status === "Accepted") && <span className={styles.accepted}>{status}</span>}
                 </div>
-                <div className={styles.submit_wrapper}>
-                    $<input type="number" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))} />
-                    <button onClick={handleSubmit} className="button-dark">Submit</button>
-                </div>            </div>
+                <div className={styles.offer_wrapper}>
+                    Offer: <div className={styles.offer}>{`$${amount}`}</div>
+                </div>
+                <div className={styles.response_wrapper}>
+                    <button onClick={rejectSettlement} className="button-dark">Reject</button>
+                    <button onClick={acceptSettlement} className="button-light">Accept</button>
+                </div>
+            </div>
         </>
     )
 }

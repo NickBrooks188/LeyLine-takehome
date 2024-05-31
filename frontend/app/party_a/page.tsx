@@ -12,6 +12,7 @@ export default function Page() {
     const [errors, setErrors] = useState("");
     const [amount, setAmount] = useState(0);
     const [status, setStatus] = useState("Not sent");
+    const [change, setChange] = useState(false);
 
     const settlement = useAppSelector((state) => state.settlement?.data)
 
@@ -46,7 +47,7 @@ export default function Page() {
                 console.error(serverData.errors)
                 setErrors(serverData.errors)
             } else {
-                setStatus('sent')
+                setStatus('Sent')
             }
         } else {
             const serverData = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Sent' }))

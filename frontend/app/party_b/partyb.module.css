@@ -98,6 +98,17 @@
     font-weight: bold;
 }
 
+.offer_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.offer {
+    background-color: var(--gray-light);
+}
+
 .response_wrapper {
     display: flex;
     justify-content: center;
