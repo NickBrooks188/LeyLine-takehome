@@ -122,10 +122,12 @@ a {
   align-items: center;
   padding: 0;
   min-height: 100vh;
+  gap: 30px;
+  font-size: 20px;
 }
 
 .button-dark {
-  background-color: transparent;
+  background-color: black;
   border-radius: 8px;
   padding: 14px;
   color: white;
@@ -139,7 +141,7 @@ a {
   margin: 10px 0 10px 0;
   cursor: pointer;
   border: none;
-  border: 2px solid #aaa;
+  /* border: 2px solid #aaa; */
 }
 
 .button-dark>svg {
@@ -155,9 +157,9 @@ a {
 }
 
 .button-light {
-  background-color: var(--orange-light);
+  background-color: white;
   border-radius: 8px;
-  padding: 14px;
+  padding: 13px;
   color: black;
   font-size: 14px;
   display: flex;
@@ -168,7 +170,7 @@ a {
   box-sizing: border-box;
   margin: 10px 0 10px 0;
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--gray-med)
 }
 
 .button-light>svg {
@@ -176,11 +178,11 @@ a {
 }
 
 .button-light:hover {
-  background-color: var(--orange-med);
+  background-color: var(--gray-light);
 }
 
 .button-light:active {
-  background-color: var(--orange-dark);
+  background-color: var(--gray-med);
 }
 
 .logo {
@@ -192,13 +194,27 @@ a {
   margin-left: 3px;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='number'] {
   border: 1px solid #EBEBEB;
   border-radius: 5px;
   padding: 10px;
-  font-size: 14px;
+  font-size: 20px;
   margin: 10px 0 10px 0;
-  width: 100%;
+  width: 150px;
+  height: 44px;
+}
+
+input[type='number'] {
+  padding-left: 26px;
+}
+
+.currency {
+  margin-left: -200px;
+  margin-top: -1px;
+  position: absolute;
+  color: #aaa;
+  font-size: 20px;
 }
 
 textarea {
@@ -228,7 +244,13 @@ button:disabled {
   background-color: #aaa;
   color: #666;
   cursor: not-allowed;
-  border: none
+  border: none;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 button:disabled:hover {
@@ -246,4 +268,15 @@ button:disabled:hover {
 
 .back:hover {
   text-decoration: underline;
+}
+
+.horizontal_divider {
+  height: 50px;
+  width: 0px;
+  border-right: 1px solid var(--gray-med);
+  margin: 0 10px 0 10px;
+}
+
+.gray-text {
+  color: var(--gray-dark);
 }

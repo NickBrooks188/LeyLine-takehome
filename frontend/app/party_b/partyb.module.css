@@ -75,27 +75,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
-.not_sent {
-    color: var(--orange-dark);
-    font-weight: bold;
+.not_offered,
+.offered,
+.rejected,
+.accepted {
+    border: 2px solid;
+    border-radius: 40px;
+    padding: 12px;
+    color: white;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sent {
-    color: var(--yellow);
-    font-weight: bold;
+.not_offered {
+    background-color: var(--orange-dark);
+}
+
+.offered {
+    background-color: var(--yellow);
 }
 
 .rejected {
-    color: var(--red);
-    font-weight: bold;
+    background-color: var(--red);
 }
 
 .accepted {
-    color: var(--green);
-    font-weight: bold;
+    background-color: var(--green);
 }
 
 .offer_wrapper {
@@ -106,7 +116,7 @@
 }
 
 .offer {
-    background-color: var(--gray-light);
+    padding: 2px;
 }
 
 .response_wrapper {
@@ -114,4 +124,18 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+@keyframes highlight {
+    0% {
+        background: var(--gray-dark);
+    }
+
+    100% {
+        background: none;
+    }
+}
+
+.highlight {
+    animation: highlight 1s;
 }

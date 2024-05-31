@@ -18,7 +18,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.title_divider} />
       <div className={styles.nav_buttons}>
-        <Link href='/party_a'><div className="button-dark">Party A</div></Link>
+        <Link href='/party_a'><div className="button-light">Party A</div></Link>
         <div className="button-dark" onClick={deleteSettlement}><FontAwesomeIcon icon={faArrowsSpin} /> Reset Settlement</div>
         <Link href='/party_b'><div className="button-light">Party B</div></Link>
       </div>

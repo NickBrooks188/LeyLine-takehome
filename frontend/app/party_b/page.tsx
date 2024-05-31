@@ -15,8 +15,9 @@ let socket: any
 export default function Page() {
     const dispatch = useAppDispatch()
     const settlement = useAppSelector((state) => state.settlement.data)
-    const [amount, setAmount] = useState(0);
-    const [status, setStatus] = useState("Not sent");
+    const [amount, setAmount] = useState<string | number>("N/A");
+    const [status, setStatus] = useState("Not offered");
+    const [highlight, setHighlight] = useState(false)
 
     useEffect(() => {
 
@@ -55,7 +56,12 @@ export default function Page() {
             console.log(obj)
             switch (obj.type) {
                 case "a": {
-                    console.log('here')
+                    setAmount(obj.amount)
+                    setStatus('Offered')
+                    setHighlight(true)
+                    setTimeout(() => {
+                        setHighlight(false)
+                    }, 1000)
                     return
                 }
                 case "b": {
@@ -76,6 +82,7 @@ export default function Page() {
     }, [])
 
     const rejectSettlement = async () => {
+        if (status === "Rejected") return
         const serverData: any = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Rejected' }))
         if (serverData.errors) {
             console.error(serverData.errors)
@@ -86,12 +93,12 @@ export default function Page() {
     }
 
     const acceptSettlement = async () => {
+        if (status === "Accepted") return
         const serverData: any = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Accepted' }))
         if (serverData.errors) {
             console.error(serverData.errors)
         } else {
             socket.emit('server', { room: 1, type: "b", status: "Accepted" })
-
             setStatus('Accepted')
         }
     }
@@ -102,21 +109,23 @@ export default function Page() {
             <Link href='/'>
                 <div className="back"><FontAwesomeIcon icon={faChevronLeft} /> Back</div>
             </Link>
-            <div className={styles.main_content}>
-                <div className={styles.status_wrapper}>Status:
-                    {(status === "Not sent") && <span className={styles.not_sent}>{status}</span>}
-                    {(status === "Sent") && <span className={styles.sent}>{status}</span>}
+            <main className='main'>
+                <div className={styles.status_wrapper}><div className="gray-text">Status</div>
+                    <div className="horizontal_divider" />
+                    {(status === "Not offered") && <span className={styles.not_offered}>{status}</span>}
+                    {(status === "Offered") && <span className={styles.offered}>{status}</span>}
                     {(status === "Rejected") && <span className={styles.rejected}>{status}</span>}
                     {(status === "Accepted") && <span className={styles.accepted}>{status}</span>}
                 </div>
                 <div className={styles.offer_wrapper}>
-                    Offer: <div className={styles.offer}>{`$${amount}`}</div>
+                    <div className="gray-text">Offer: </div>
+                    <div className={`${styles.offer} ${highlight ? styles.highlight : ''}`}>{`${(amount === "N/A") ? "" : "$"}${amount}`}</div>
                 </div>
                 <div className={styles.response_wrapper}>
-                    <button onClick={rejectSettlement} className="button-dark">Reject</button>
-                    <button onClick={acceptSettlement} className="button-light">Accept</button>
+                    <button onClick={rejectSettlement} disabled={(status !== "Offered")} className="button-dark">Reject</button>
+                    <button onClick={acceptSettlement} disabled={(status !== "Offered")} className="button-light">Accept</button>
                 </div>
-            </div>
+            </main>
         </>
     )
 }
