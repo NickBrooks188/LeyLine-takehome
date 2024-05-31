@@ -17,8 +17,7 @@ def create_settlement():
     settlements = Settlement.query.all()
     if len(settlements):
         return {'errors': 'Settlement already exists'}, 401
-    form = SettlementForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form = SettlementForm(meta={'csrf':False})
     if form.validate_on_submit():
         data = form.data
         new_settlement = Settlement(
@@ -28,13 +27,13 @@ def create_settlement():
         db.session.add(new_settlement)
         db.session.commit()
         return new_settlement.to_dict()
+    print(form.errors)
     return {'errors': form.errors}, 401
 
 @settlement.route('', methods=['PUT'])
 def edit_settlement():
-    form = SettlementForm()
+    form = SettlementForm(meta={'csrf':False})
     settlement = Settlement.query.all()[0]
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         settlement.amount = data['amount']

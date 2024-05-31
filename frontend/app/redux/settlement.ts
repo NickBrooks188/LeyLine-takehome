@@ -21,18 +21,19 @@ export const thunkAddSettlement = (settlement: {}) => async (dispatch: any) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(settlement)
     })
+    console.log(response)
     if (response.ok) {
         const data = await response.json();
-        if (data.errors) {
-            return;
-        }
         dispatch(settlementSlice.actions.setSettlement(data));
         return data
+    } else {
+        const data = await response.json();
+        return data;
     }
 };
 
 export const thunkUpdateSettlement = (settlement: {}) => async (dispatch: any) => {
-    const response = await fetch(`http://localhost:8000/api/settlement`, {
+    const response = await fetch(`http://localhost:8000/api/settlements`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(settlement)
@@ -40,7 +41,7 @@ export const thunkUpdateSettlement = (settlement: {}) => async (dispatch: any) =
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
-            return;
+            return data;
         }
         dispatch(settlementSlice.actions.setSettlement(data));
         return data
@@ -67,7 +68,7 @@ export const settlementSlice = createSlice({
     initialState,
     reducers: {
         setSettlement: (state, action: PayloadAction) => {
-            state = action.payload
+            state.data = action.payload
         }
     }
 });

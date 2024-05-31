@@ -120,3 +120,37 @@
 .navigate_button:active {
     opacity: 90%;
 }
+
+.status_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.not_sent {
+    color: var(--orange-dark);
+    font-weight: bold;
+}
+
+.sent {
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.rejected {
+    color: var(--red);
+    font-weight: bold;
+}
+
+.accepted {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.submit_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
