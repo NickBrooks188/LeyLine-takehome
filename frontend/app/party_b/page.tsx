@@ -7,7 +7,10 @@ import Image from 'next/image'
 import { thunkGetSettlement, thunkUpdateSettlement } from "../redux/settlement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { io } from 'socket.io-client';
 
+
+let socket: any
 
 export default function Page() {
     const dispatch = useAppDispatch()
@@ -35,11 +38,49 @@ export default function Page() {
         document.title = 'Party B'
     }, [])
 
+
+    useEffect(() => {
+        socket = io("localhost:8000")
+        console.log(socket)
+        console.log("RUNNING")
+
+        const payload = {
+            type: "newUser",
+            method: "POST",
+            room: 1,
+            user: 1
+        }
+
+        socket.on("server", (obj: any) => {
+            console.log(obj)
+            switch (obj.type) {
+                case "a": {
+                    console.log('here')
+                    return
+                }
+                case "b": {
+                    console.log('here')
+                    return
+                }
+            }
+
+        })
+
+        socket.emit("join", { room: 1, user: payload })
+
+
+        return (() => {
+            socket.emit("leave", { room: 1 })
+            socket.disconnect()
+        })
+    }, [])
+
     const rejectSettlement = async () => {
         const serverData: any = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Rejected' }))
         if (serverData.errors) {
             console.error(serverData.errors)
         } else {
+            socket.emit('server', { room: 1, type: "b", status: "Rejected" })
             setStatus('Rejected')
         }
     }
@@ -49,9 +90,12 @@ export default function Page() {
         if (serverData.errors) {
             console.error(serverData.errors)
         } else {
+            socket.emit('server', { room: 1, type: "b", status: "Accepted" })
+
             setStatus('Accepted')
         }
     }
+
 
     return (
         <>

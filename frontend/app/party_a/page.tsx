@@ -7,6 +7,9 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { thunkGetSettlement, thunkAddSettlement, thunkUpdateSettlement } from "../redux/settlement";
+import { io } from 'socket.io-client';
+
+let socket: any
 
 export default function Page() {
     const [errors, setErrors] = useState("");
@@ -31,7 +34,6 @@ export default function Page() {
             setStatus(settlement.status)
             setAmount(settlement.amount)
         }
-        console.log(settlement)
     }, [settlement])
 
 
@@ -39,21 +41,62 @@ export default function Page() {
         document.title = 'Party A'
     }, [])
 
+
+
+    useEffect(() => {
+        socket = io("localhost:8000")
+        console.log(socket)
+        console.log("RUNNING")
+
+        const payload = {
+            type: "newUser",
+            method: "POST",
+            room: 1,
+            user: 1
+        }
+
+        socket.on("server", (obj: any) => {
+            console.log(obj)
+            switch (obj.type) {
+                case "a": {
+                    console.log('here')
+                    return
+                }
+                case "b": {
+                    console.log('here')
+                    return
+                }
+            }
+
+        })
+
+        socket.emit("join", { room: 1, user: payload })
+
+
+        return (() => {
+            socket.emit("leave", { room: 1 })
+            socket.disconnect()
+        })
+    }, [])
+
     const handleSubmit = async () => {
         if (!settlement) {
-            const serverData = await dispatch(thunkAddSettlement({ amount: amount, status: 'Sent' }))
+            const serverData = await dispatch(thunkAddSettlement({ amount, status: 'Sent' }))
             console.log(serverData)
             if (serverData.errors) {
                 console.error(serverData.errors)
                 setErrors(serverData.errors)
             } else {
+                socket.emit('server', { room: 1, type: "a", amount })
                 setStatus('Sent')
             }
         } else {
-            const serverData = await dispatch(thunkUpdateSettlement({ amount: amount, status: 'Sent' }))
+            const serverData = await dispatch(thunkUpdateSettlement({ amount, status: 'Sent' }))
             if (serverData.errors) {
                 console.error(serverData.errors)
                 setErrors(serverData.errors)
+            } else {
+                socket.emit('server', { room: 1, type: "a", amount })
             }
         }
     }
